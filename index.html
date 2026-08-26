@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Blanca Labs — La agencia de GTM para LATAM</title>
+<meta name="description" content="Casa Blanca Labs. Web3 community infrastructure & growth. Construimos, operamos y hacemos crecer comunidades Web3 en España y LatAm.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230c0c0c'/%3E%3Crect x='14' y='26' width='72' height='6' fill='%23fff'/%3E%3Crect x='20' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='34' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='46' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='58' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='72' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='14' y='60' width='72' height='6' fill='%23fff'/%3E%3Cpolygon points='30,72 50,86 70,72 60,72 50,79 40,72' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;800&family=Michroma&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f6f3;
+    --ink: #0c0c0c;
+    --muted: #62625e;
+    --line: #dcdcd6;
+    --radius: 10px;
+    --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    --font-mark: "Michroma", "Space Grotesk", sans-serif;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--ink); color: var(--paper); }
+
+  a { color: inherit; }
+
+  .wrap {
+    width: min(1160px, 100% - 3rem);
+    margin-inline: auto;
+  }
+
+  /* ---------- Wordmark pill ---------- */
+  .wordmark {
+    font-family: var(--font-mark);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  /* ---------- Nav ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 0;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+  .nav-brand svg { height: 30px; width: auto; }
+  .nav-links {
+    display: none;
+    gap: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 150ms var(--ease-out);
+    padding: 0.5rem 0;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }
+  .btn {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.7rem 1.5rem;
+    min-height: 44px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 120ms var(--ease-out), background 150ms var(--ease-out), color 150ms var(--ease-out);
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  .btn.invert { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+  .on-dark a:focus-visible, .on-dark button:focus-visible { outline-color: var(--paper); }
+
+  @media (min-width: 820px) {
+    .nav-links { display: flex; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: clamp(4rem, 10vh, 7.5rem) 0 clamp(3rem, 7vh, 5.5rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero-grid { grid-template-columns: 7fr 5fr; gap: 4rem; }
+  }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2.5rem;
+    height: 2px;
+    background: var(--ink);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  h1 .thin { font-weight: 400; color: var(--muted); }
+  .hero p.lead {
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--muted);
+    max-width: 34em;
+  }
+  .hero-ctas {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+  .hero-mark {
+    justify-self: center;
+    width: min(380px, 80%);
+  }
+  .hero-mark svg { width: 100%; height: auto; display: block; }
+
+  /* staggered load-in */
+  .rise { opacity: 0; transform: translateY(24px); animation: rise 700ms var(--ease-out) forwards; }
+  .rise.d1 { animation-delay: 80ms; }
+  .rise.d2 { animation-delay: 180ms; }
+  .rise.d3 { animation-delay: 300ms; }
+  .rise.d4 { animation-delay: 440ms; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* ---------- Marquee / trusted ---------- */
+  .trusted {
+    border-block: 1px solid var(--line);
+    padding: 1.1rem 0;
+    overflow: hidden;
+  }
+  .marquee {
+    display: flex;
+    gap: 0;
+    width: max-content;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 3.5rem;
+    padding-right: 3.5rem;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .marquee-track .dot { letter-spacing: 0; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* ---------- Sections ---------- */
+  section { padding: clamp(4.5rem, 10vh, 7.5rem) 0; }
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .section-tag {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- Services (dark) ---------- */
+  .dark {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .dark .section-tag { color: #9a9a94; }
+  .services {
+    display: grid;
+    gap: 1px;
+    background: #2a2a28;
+    border: 1px solid #2a2a28;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  @media (min-width: 720px) { .services { grid-template-columns: 1fr 1fr; } }
+  .service {
+    background: var(--ink);
+    padding: 2.25rem 2rem 2.5rem;
+    transition: background 200ms var(--ease-out);
+  }
+  .service:hover { background: #161615; }
+  .service .num {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: #77776f;
+  }
+  .service h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 0.9rem 0 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .service p { color: #b9b9b2; max-width: 40em; }
+
+  /* ---------- Track record ---------- */
+  .index-list { border-top: 1px solid var(--line); }
+  .index-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.4rem 0.25rem;
+    border-bottom: 1px solid var(--line);
+    transition: background 180ms var(--ease-out), padding 180ms var(--ease-out);
+  }
+  .index-row:hover { background: #efefe9; padding-left: 0.9rem; }
+  .index-row .no {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+  .index-row .what {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.05rem, 2vw, 1.35rem);
+    letter-spacing: -0.01em;
+  }
+  .index-row .where {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: right;
+  }
+  .foot-note { margin-top: 2rem; color: var(--muted); max-width: 44em; }
+
+  /* ---------- Statement ---------- */
+  .statement {
+    text-align: center;
+  }
+  .statement blockquote {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    max-width: 21em;
+    margin: 0 auto;
+    text-wrap: balance;
+  }
+  .statement strong { font-weight: 700; }
+  .statement .who {
+    margin-top: 2rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ---------- Final CTA ---------- */
+  .cta-final { text-align: center; }
+  .cta-final .hero-mark { margin: 0 auto 2.5rem; width: min(300px, 70%); }
+  .cta-final h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+  .cta-final p { color: var(--muted); margin-top: 1.25rem; max-width: 36em; margin-inline: auto; }
+  .cta-final .hero-ctas { justify-content: center; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid #2a2a28;
+    padding: 2.5rem 0;
+    font-size: 0.85rem;
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    color: #9a9a94;
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rise, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
+    .marquee { animation: none; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+
+<!-- Definición del logo arquitectónico (recreación vectorial), reutilizada con <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="cbl-building">
+      <!-- techo -->
+      <rect x="18" y="14" width="224" height="9"/>
+      <rect x="26" y="27" width="208" height="4"/>
+      <!-- ala izquierda: dos filas de ventanas -->
+      <rect x="32" y="39" width="7" height="15"/><rect x="45" y="39" width="7" height="15"/><rect x="58" y="39" width="7" height="15"/><rect x="71" y="39" width="7" height="15"/><rect x="84" y="39" width="7" height="15"/>
+      <rect x="32" y="61" width="7" height="15"/><rect x="45" y="61" width="7" height="15"/><rect x="58" y="61" width="7" height="15"/><rect x="71" y="61" width="7" height="15"/><rect x="84" y="61" width="7" height="15"/>
+      <!-- pórtico central: dintel + columnas -->
+      <rect x="103" y="35" width="54" height="5"/>
+      <rect x="106" y="44" width="7" height="32"/>
+      <rect x="119" y="44" width="7" height="32"/>
+      <rect x="134" y="44" width="7" height="32"/>
+      <rect x="147" y="44" width="7" height="32"/>
+      <!-- ala derecha -->
+      <rect x="169" y="39" width="7" height="15"/><rect x="182" y="39" width="7" height="15"/><rect x="195" y="39" width="7" height="15"/><rect x="208" y="39" width="7" height="15"/><rect x="221" y="39" width="7" height="15"/>
+      <rect x="169" y="61" width="7" height="15"/><rect x="182" y="61" width="7" height="15"/><rect x="195" y="61" width="7" height="15"/><rect x="208" y="61" width="7" height="15"/><rect x="221" y="61" width="7" height="15"/>
+      <!-- base -->
+      <rect x="26" y="82" width="208" height="4"/>
+      <rect x="18" y="92" width="224" height="9"/>
+      <!-- líneas de zócalo + chevrón -->
+      <rect x="18" y="109" width="70" height="5"/>
+      <rect x="172" y="109" width="70" height="5"/>
+      <polygon points="94,109 130,134 166,109 152,109 130,124 108,109"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="nav-brand" href="#" aria-label="Casa Blanca Labs — inicio">
+      <svg viewBox="0 0 260 150" fill="currentColor" role="img" aria-label="Logo de Casa Blanca Labs">
+        <use href="#cbl-building"/>
+      </svg>
+      <span class="wordmark">CASA BLANCA LABS</span>
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#terreno">En el terreno</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn" href="#contacto">Hablemos</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow rise d1">Web3 Community Infrastructure &amp; Growth</p>
+      <h1 class="rise d2">La agencia de GTM<br>para <span class="thin">LATAM.</span></h1>
+      <p class="lead rise d3">Construimos, operamos y hacemos crecer comunidades Web3 — todos los días, en español e inglés, al mismo estándar. España y Latinoamérica.</p>
+      <div class="hero-ctas rise d4">
+        <a class="btn" href="#contacto">Hablemos</a>
+        <a class="btn ghost" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-mark rise d3" aria-hidden="true">
+      <svg viewBox="0 0 260 150" fill="currentColor"><use href="#cbl-building"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUSTED BY ============ -->
+<div class="trusted" aria-label="Confían en nosotros">
+  <div class="marquee">
+    <!-- pista duplicada para el loop infinito -->
+    <div class="marquee-track" aria-hidden="false">
+      <span>Trusted by</span><span class="dot">✦</span>
+      <span>Tangem</span><span class="dot">✦</span>
+      <span>Bitso</span><span class="dot">✦</span>
+      <span>Solana</span><span class="dot">✦</span>
+      <span>Money Expo México</span><span class="dot">✦</span>
+      <span>Money Expo Colombia</span><span class="dot">✦</span>
+    </div>
+    <div class="marquee-track" aria-hidden="true">
+      <span>Trusted by</span><span class="dot">✦</span>
+      <span>Tangem</span><span class="dot">✦</span>
+      <span>Bitso</span><span class="dot">✦</span>
+      <span>Solana</span><span class="dot">✦</span>
+      <span>Money Expo México</span><span class="dot">✦</span>
+      <span>Money Expo Colombia</span><span class="dot">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="dark on-dark" id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Lo que hacemos,<br>todos los días.</h2>
+      <p class="section-tag">Servicios</p>
+    </div>
+    <div class="services">
+      <article class="service reveal">
+        <p class="num">01</p>
+        <h3>Build</h3>
+        <p>Comunidades, servidores y cuentas desde cero. Bots a medida, verificación, anti-raid, puntos y progresión, dashboards y verificación de holdings onchain en EVM y Solana. Todo in-house.</p>
+      </article>
+      <article class="service reveal">
+        <p class="num">02</p>
+        <h3>Operate</h3>
+        <p>Discord, Telegram y X operados todos los días, en español e inglés, al mismo estándar. Moderación, contenido y respuesta en tiempo real.</p>
+      </article>
+      <article class="service reveal">
+        <p class="num">03</p>
+        <h3>Amplify</h3>
+        <p>KOLs, colaboraciones, PR y paid media a través de una red directa, sin intermediarios. Alcance real en la región.</p>
+      </article>
+      <article class="service reveal">
+        <p class="num">04</p>
+        <h3>Show up</h3>
+        <p>Conferencias, paneles y eventos IRL en toda la región. Presencia física donde tu comunidad está: la parte que los clientes recuerdan.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EN EL TERRENO ============ -->
+<section id="terreno">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Cada línea, una sala<br>en la que estuvimos.</h2>
+      <p class="section-tag">En el terreno · 2026</p>
+    </div>
+    <div class="index-list reveal">
+      <div class="index-row">
+        <span class="no">01</span>
+        <span class="what">Tangem — Product Launch</span>
+        <span class="where">Escenario</span>
+      </div>
+      <div class="index-row">
+        <span class="no">02</span>
+        <span class="what">Money Expo México 2026 — Panel de discusión</span>
+        <span class="where">CDMX</span>
+      </div>
+      <div class="index-row">
+        <span class="no">03</span>
+        <span class="what">Money Expo Colombia 2026 — Tangem Pay</span>
+        <span class="where">Bogotá</span>
+      </div>
+      <div class="index-row">
+        <span class="no">04</span>
+        <span class="what">Panel: tokens, cripto y privacidad</span>
+        <span class="where">Bogotá</span>
+      </div>
+      <div class="index-row">
+        <span class="no">05</span>
+        <span class="what">Community Meetup &amp; Education Session</span>
+        <span class="where">CDMX</span>
+      </div>
+      <div class="index-row">
+        <span class="no">06</span>
+        <span class="what">IRL Night — México Event</span>
+        <span class="where">CDMX</span>
+      </div>
+    </div>
+    <p class="foot-note reveal">Esa es la parte del marketing Web3 que la mayoría de agencias se salta — y es la parte que los clientes recuerdan. El resto de lo que hacemos es menos fotogénico, y es lo que más importa.</p>
+  </div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="statement dark on-dark">
+  <div class="wrap reveal">
+    <blockquote>«Construimos la infraestructura, operamos la comunidad y <strong>damos la cara en la región.</strong> Sin intermediarios.»</blockquote>
+    <p class="who">Casa Blanca Labs — España &amp; LatAm</p>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="cta-final" id="contacto">
+  <div class="wrap reveal">
+    <div class="hero-mark" aria-hidden="true">
+      <svg viewBox="0 0 260 150" fill="currentColor"><use href="#cbl-building"/></svg>
+    </div>
+    <h2>¿Listo para construir<br>en LATAM?</h2>
+    <p>Cuéntanos qué estás construyendo y te decimos exactamente cómo lo llevamos a la región.</p>
+    <div class="hero-ctas">
+      <!-- TODO: reemplazar con el email / Telegram / X reales de Casa Blanca Labs -->
+      <a class="btn" href="mailto:hola@casablancalabs.xyz">Escríbenos</a>
+      <a class="btn ghost" href="#servicios">Ver servicios</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="dark on-dark">
+  <div class="wrap footer-inner">
+    <span class="wordmark" style="color: var(--paper);">CASA BLANCA LABS</span>
+    <span>Web3 community infrastructure &amp; growth — España y LatAm</span>
+    <span>© 2026 Casa Blanca Labs</span>
+  </div>
+</footer>
+
+<script>
+  // Revelado al hacer scroll (respeta prefers-reduced-motion vía CSS)
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

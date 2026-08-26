@@ -91,7 +91,7 @@
     font-size: 0.68rem;
     letter-spacing: 0.09em;
     border: 1.5px solid currentColor;
-    border-radius: 999px;
+    border-radius: 9px;
     padding: 0.5rem 1rem;
     white-space: nowrap;
     display: inline-block;
@@ -123,7 +123,9 @@
   .btn {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -131,12 +133,12 @@
     background: var(--ink);
     color: var(--paper);
     border: 1.5px solid var(--ink);
-    border-radius: 999px;
-    padding: 0.65rem 1.4rem;
+    border-radius: 2px;
+    padding: 0.8rem 1.6rem;
     min-height: 44px;
     text-decoration: none;
     cursor: pointer;
-    transition: transform 120ms var(--ease-out), opacity 150ms var(--ease-out);
+    transition: transform 120ms var(--ease-out), background 150ms var(--ease-out), color 150ms var(--ease-out), border-color 150ms var(--ease-out);
   }
   .btn:hover { transform: translateY(-2px); }
   .btn:active { transform: none; }
@@ -145,7 +147,7 @@
     color: var(--ink);
     border-color: var(--line);
   }
-  .btn.quiet:hover { border-color: var(--ink); }
+  .btn.quiet:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
 
   .theme-toggle {
     width: 44px;
@@ -155,7 +157,7 @@
     background: transparent;
     color: var(--ink);
     border: 1.5px solid var(--line);
-    border-radius: 999px;
+    border-radius: 2px;
     cursor: pointer;
     transition: transform 120ms var(--ease-out), border-color 150ms var(--ease-out);
   }

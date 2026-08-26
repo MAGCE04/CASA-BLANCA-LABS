@@ -88,11 +88,8 @@
   /* ---------- marca ---------- */
   .wordmark {
     font-family: var(--font-mark);
-    font-size: 0.68rem;
-    letter-spacing: 0.09em;
-    border: 1.5px solid currentColor;
-    border-radius: 9px;
-    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
     white-space: nowrap;
     display: inline-block;
   }
@@ -123,8 +120,8 @@
   .btn {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
@@ -132,10 +129,10 @@
     gap: 0.5rem;
     background: var(--ink);
     color: var(--paper);
-    border: 1.5px solid var(--ink);
+    border: 1px solid var(--ink);
     border-radius: 2px;
-    padding: 0.8rem 1.6rem;
-    min-height: 44px;
+    padding: 0 1.3rem;
+    min-height: 42px;
     text-decoration: none;
     cursor: pointer;
     transition: transform 120ms var(--ease-out), background 150ms var(--ease-out), color 150ms var(--ease-out), border-color 150ms var(--ease-out);
@@ -149,22 +146,28 @@
   }
   .btn.quiet:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
 
-  .theme-toggle {
-    width: 44px;
-    height: 44px;
+  .theme-toggle, .lang-toggle {
+    width: 42px;
+    height: 42px;
     display: grid;
     place-items: center;
     background: transparent;
     color: var(--ink);
-    border: 1.5px solid var(--line);
+    border: 1px solid var(--line);
     border-radius: 2px;
     cursor: pointer;
     transition: transform 120ms var(--ease-out), border-color 150ms var(--ease-out);
   }
-  .theme-toggle:hover { transform: translateY(-2px); border-color: var(--ink); }
-  .theme-toggle svg { width: 17px; height: 17px; }
+  .theme-toggle:hover, .lang-toggle:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .theme-toggle svg { width: 16px; height: 16px; }
   .theme-toggle .icon-moon { display: var(--show-moon); }
   .theme-toggle .icon-sun { display: var(--show-sun); }
+  .lang-toggle {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
 
   /* ---------- hero ---------- */
   .hero { padding: clamp(4rem, 11vh, 8rem) 0 0; }
@@ -403,9 +406,10 @@
     </a>
     <div class="nav-right">
       <nav class="nav-links" aria-label="Navegación principal">
-        <a href="#servicios">Servicios</a>
-        <a href="#terreno">En el terreno</a>
+        <a href="#servicios" data-i18n="nav-servicios">Servicios</a>
+        <a href="#terreno" data-i18n="nav-terreno">En el terreno</a>
       </nav>
+      <button class="lang-toggle" type="button" aria-label="Switch language / Cambiar idioma">EN</button>
       <button class="theme-toggle" type="button" aria-label="Cambiar entre modo claro y oscuro">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -415,7 +419,7 @@
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
         </svg>
       </button>
-      <a class="btn" href="#contacto">Hablemos</a>
+      <a class="btn" href="#contacto" data-i18n="cta-hablemos">Hablemos</a>
     </div>
   </div>
 </header>
@@ -426,13 +430,13 @@
   <section class="hero">
     <div class="wrap">
       <p class="kicker rise d1">Web3 Growth &amp; Distribution</p>
-      <h1 class="rise d2">La agencia de GTM <em>para LATAM.</em></h1>
+      <h1 class="rise d2" data-i18n="hero-h1">La agencia de GTM <em>para LATAM.</em></h1>
       <div class="hero-bottom">
         <div class="rise d3">
-          <p class="lead">Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong></p>
+          <p class="lead" data-i18n="hero-lead">Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong></p>
           <div class="hero-ctas">
-            <a class="btn" href="#contacto">Hablemos</a>
-            <a class="btn quiet" href="#servicios">Ver servicios</a>
+            <a class="btn" href="#contacto" data-i18n="cta-hablemos">Hablemos</a>
+            <a class="btn quiet" href="#servicios" data-i18n="cta-servicios">Ver servicios</a>
           </div>
         </div>
         <div class="hero-building rise d4" aria-hidden="true">
@@ -458,26 +462,26 @@
   <!-- servicios: flujo editorial -->
   <section class="flow" id="servicios">
     <div class="wrap">
-      <p class="flow-intro reveal">Primero, <strong>growth y distribución</strong>. Debajo, la infraestructura que lo sostiene. Hacemos las dos cosas todos los días.</p>
+      <p class="flow-intro reveal" data-i18n="flow-intro">Primero, <strong>growth y distribución</strong>. Debajo, la infraestructura que lo sostiene. Hacemos las dos cosas todos los días.</p>
 
       <div class="service reveal">
-        <p class="service-word"><span>Crecer</span>Amplify</p>
-        <p>Growth y distribución para tu proyecto: KOLs, colaboraciones, PR y paid media a través de una <strong>red directa, sin intermediarios</strong>. Alcance real en la región.</p>
+        <p class="service-word"><span data-i18n="svc-amplify-tag">Crecer</span>Amplify</p>
+        <p data-i18n="svc-amplify">Growth y distribución para tu proyecto: KOLs, colaboraciones, PR y paid media a través de una <strong>red directa, sin intermediarios</strong>. Alcance real en la región.</p>
       </div>
 
       <div class="service reveal">
-        <p class="service-word"><span>Dar la cara</span>Show up</p>
-        <p>Conferencias, paneles y eventos IRL en toda LATAM. <strong>Presencia física donde tu comunidad está.</strong> La parte que los clientes recuerdan.</p>
+        <p class="service-word"><span data-i18n="svc-showup-tag">Dar la cara</span>Show up</p>
+        <p data-i18n="svc-showup">Conferencias, paneles y eventos IRL en toda LATAM. <strong>Presencia física donde tu comunidad está.</strong> La parte que los clientes recuerdan.</p>
       </div>
 
       <div class="service reveal">
-        <p class="service-word"><span>Construir</span>Build</p>
-        <p>Comunidades, servidores y cuentas <strong>desde cero</strong>. Bots a medida, verificación, anti-raid, puntos y progresión, dashboards y verificación de holdings onchain en EVM y Solana. Todo in-house.</p>
+        <p class="service-word"><span data-i18n="svc-build-tag">Construir</span>Build</p>
+        <p data-i18n="svc-build">Comunidades, servidores y cuentas <strong>desde cero</strong>. Bots a medida, verificación, anti-raid, puntos y progresión, dashboards y verificación de holdings onchain en EVM y Solana. Todo in-house.</p>
       </div>
 
       <div class="service reveal">
-        <p class="service-word"><span>Operar</span>Operate</p>
-        <p>Discord, Telegram y X operados <strong>todos los días</strong>, en español e inglés, al mismo estándar. Moderación, contenido y respuesta en tiempo real.</p>
+        <p class="service-word"><span data-i18n="svc-operate-tag">Operar</span>Operate</p>
+        <p data-i18n="svc-operate">Discord, Telegram y X operados <strong>todos los días</strong>, en español e inglés, al mismo estándar. Moderación, contenido y respuesta en tiempo real.</p>
       </div>
     </div>
   </section>
@@ -485,7 +489,7 @@
   <!-- en el terreno -->
   <section class="terreno" id="terreno">
     <div class="wrap reveal">
-      <p class="label">En el terreno · 2026</p>
+      <p class="label" data-i18n="terreno-label">En el terreno · 2026</p>
       <p class="rooms">
         <b>Peru Blockchain Conference</b> <span class="place">Lima</span><span class="sep">✦</span>
         <b>AMFE</b> <span class="place">México</span><span class="sep">✦</span>
@@ -494,7 +498,7 @@
         <b>Blockchain Rio</b> <span class="place">Río</span><span class="sep">✦</span>
         <b>México Blockchain Week</b> <span class="place">CDMX</span>
       </p>
-      <p class="note">Cada línea es una sala en la que estuvimos este año. Esa es la parte del marketing Web3 que la mayoría de agencias se salta, <strong>y es la parte que los clientes recuerdan.</strong></p>
+      <p class="note" data-i18n="terreno-note">Cada línea es una sala en la que estuvimos este año. Esa es la parte del marketing Web3 que la mayoría de agencias se salta, <strong>y es la parte que los clientes recuerdan.</strong></p>
     </div>
   </section>
 
@@ -502,19 +506,19 @@
   <section class="statement">
     <img class="watermark mark" src="assets/casa-blanca-logo.png" alt="">
     <div class="wrap reveal">
-      <blockquote>«Hacemos crecer el proyecto, operamos la comunidad y <strong>damos la cara en la región.</strong> Sin intermediarios.»</blockquote>
+      <blockquote data-i18n="quote">«Hacemos crecer el proyecto, operamos la comunidad y <strong>damos la cara en la región.</strong> Sin intermediarios.»</blockquote>
     </div>
   </section>
 
   <!-- cta -->
   <section class="cta" id="contacto">
     <div class="wrap reveal">
-      <h2>¿Listo para construir en LATAM?</h2>
-      <p>Cuéntanos qué estás construyendo y te decimos exactamente cómo lo llevamos a la región.</p>
+      <h2 data-i18n="cta-h2">¿Listo para construir en LATAM?</h2>
+      <p data-i18n="cta-p">Cuéntanos qué estás construyendo y te decimos exactamente cómo lo llevamos a la región.</p>
       <div class="hero-ctas">
         <!-- TODO: reemplazar con el email / Telegram / X reales de Casa Blanca Labs -->
-        <a class="btn" href="mailto:hola@casablancalabs.xyz">Escríbenos</a>
-        <a class="btn quiet" href="#servicios">Ver servicios</a>
+        <a class="btn" href="mailto:hola@casablancalabs.xyz" data-i18n="cta-write">Escríbenos</a>
+        <a class="btn quiet" href="#servicios" data-i18n="cta-servicios">Ver servicios</a>
       </div>
     </div>
   </section>
@@ -530,6 +534,74 @@
 </footer>
 
 <script>
+  // Traducciones ES / EN
+  const I18N = {
+    es: {
+      "nav-servicios": "Servicios",
+      "nav-terreno": "En el terreno",
+      "cta-hablemos": "Hablemos",
+      "cta-servicios": "Ver servicios",
+      "cta-write": "Escríbenos",
+      "hero-h1": "La agencia de GTM <em>para LATAM.</em>",
+      "hero-lead": "Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong>",
+      "flow-intro": "Primero, <strong>growth y distribución</strong>. Debajo, la infraestructura que lo sostiene. Hacemos las dos cosas todos los días.",
+      "svc-amplify-tag": "Crecer",
+      "svc-amplify": "Growth y distribución para tu proyecto: KOLs, colaboraciones, PR y paid media a través de una <strong>red directa, sin intermediarios</strong>. Alcance real en la región.",
+      "svc-showup-tag": "Dar la cara",
+      "svc-showup": "Conferencias, paneles y eventos IRL en toda LATAM. <strong>Presencia física donde tu comunidad está.</strong> La parte que los clientes recuerdan.",
+      "svc-build-tag": "Construir",
+      "svc-build": "Comunidades, servidores y cuentas <strong>desde cero</strong>. Bots a medida, verificación, anti-raid, puntos y progresión, dashboards y verificación de holdings onchain en EVM y Solana. Todo in-house.",
+      "svc-operate-tag": "Operar",
+      "svc-operate": "Discord, Telegram y X operados <strong>todos los días</strong>, en español e inglés, al mismo estándar. Moderación, contenido y respuesta en tiempo real.",
+      "terreno-label": "En el terreno · 2026",
+      "terreno-note": "Cada línea es una sala en la que estuvimos este año. Esa es la parte del marketing Web3 que la mayoría de agencias se salta, <strong>y es la parte que los clientes recuerdan.</strong>",
+      "quote": "«Hacemos crecer el proyecto, operamos la comunidad y <strong>damos la cara en la región.</strong> Sin intermediarios.»",
+      "cta-h2": "¿Listo para construir en LATAM?",
+      "cta-p": "Cuéntanos qué estás construyendo y te decimos exactamente cómo lo llevamos a la región."
+    },
+    en: {
+      "nav-servicios": "Services",
+      "nav-terreno": "On the ground",
+      "cta-hablemos": "Let's talk",
+      "cta-servicios": "Our services",
+      "cta-write": "Write to us",
+      "hero-h1": "The GTM agency <em>for LATAM.</em>",
+      "hero-lead": "We grow and distribute Web3 projects across the region, with the community infrastructure to sustain it. <strong>Every day, in Spanish and English, to the same standard.</strong>",
+      "flow-intro": "First, <strong>growth and distribution</strong>. Underneath, the infrastructure that sustains it. We do both, every day.",
+      "svc-amplify-tag": "Crecer",
+      "svc-amplify": "Growth and distribution for your project: KOLs, collaborations, PR and paid media through a <strong>direct network, no middlemen</strong>. Real reach across the region.",
+      "svc-showup-tag": "Dar la cara",
+      "svc-showup": "Conferences, panels and IRL events across LATAM. <strong>Physical presence where your community is.</strong> The part clients remember.",
+      "svc-build-tag": "Construir",
+      "svc-build": "Communities, servers and accounts <strong>from zero</strong>. Custom bots, verification, anti-raid, points and progression, dashboards and onchain holdings verification on EVM and Solana. All in-house.",
+      "svc-operate-tag": "Operar",
+      "svc-operate": "Discord, Telegram and X operated <strong>every day</strong>, in Spanish and English, to the same standard. Moderation, content and real-time response.",
+      "terreno-label": "On the ground · 2026",
+      "terreno-note": "Every line is a room we were in this year. That is the part of Web3 marketing most agencies skip, <strong>and it is the part clients remember.</strong>",
+      "quote": "“We grow the project, run the community and <strong>show up across the region.</strong> No middlemen.”",
+      "cta-h2": "Ready to build in LATAM?",
+      "cta-p": "Tell us what you are building and we will tell you exactly how we take it to the region."
+    }
+  };
+
+  const langBtn = document.querySelector(".lang-toggle");
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+    langBtn.textContent = lang === "es" ? "EN" : "ES";
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const v = I18N[lang][el.dataset.i18n];
+      if (v) el.innerHTML = v;
+    });
+  }
+  let lang = "es";
+  try { if (localStorage.getItem("cbl-lang") === "en") lang = "en"; } catch (e) {}
+  if (lang !== "es") applyLang(lang);
+  langBtn.addEventListener("click", () => {
+    lang = lang === "es" ? "en" : "es";
+    try { localStorage.setItem("cbl-lang", lang); } catch (e) {}
+    applyLang(lang);
+  });
+
   document.querySelector(".theme-toggle").addEventListener("click", () => {
     const root = document.documentElement;
     const explicit = root.getAttribute("data-theme");

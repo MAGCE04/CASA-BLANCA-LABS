@@ -5,7 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Casa Blanca Labs | La agencia de GTM para LATAM</title>
 <meta name="description" content="Casa Blanca Labs. Growth y distribución para proyectos Web3 en LATAM, con la infraestructura de comunidad que lo sostiene.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230c0c0c'/%3E%3Crect x='14' y='26' width='72' height='6' fill='%23fff'/%3E%3Crect x='20' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='34' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='46' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='58' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='72' y='38' width='8' height='16' fill='%23fff'/%3E%3Crect x='14' y='60' width='72' height='6' fill='%23fff'/%3E%3Cpolygon points='30,72 50,86 70,72 60,72 50,79 40,72' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="canonical" href="https://casablancalabs.higgsfield.website/">
+<meta name="theme-color" content="#0c0c0c">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Casa Blanca Labs">
+<meta property="og:title" content="Casa Blanca Labs | La agencia de GTM para LATAM">
+<meta property="og:description" content="Growth y distribución para proyectos Web3 en LATAM, con la infraestructura de comunidad que lo sostiene.">
+<meta property="og:url" content="https://casablancalabs.higgsfield.website/">
+<meta property="og:image" content="https://casablancalabs.higgsfield.website/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Casa Blanca Labs | La agencia de GTM para LATAM">
+<meta name="twitter:description" content="Growth y distribución para proyectos Web3 en LATAM.">
+<meta name="twitter:image" content="https://casablancalabs.higgsfield.website/og.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Manrope:wght@400;500;800&family=Michroma&display=swap" rel="stylesheet">
@@ -202,16 +217,7 @@
     margin: clamp(0.5rem, 2vh, 1.5rem) 0;
     position: relative;
   }
-  .logo-video {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: var(--video-filter);
-    mix-blend-mode: var(--video-blend);
-  }
-  .logo-still { display: none; width: 68%; margin: clamp(1.5rem, 5vh, 3rem) auto; }
-  .hero-stage.fallback .logo-video { display: none; }
-  .hero-stage.fallback .logo-still { display: block; }
+  .logo-still { display: block; width: 68%; margin: clamp(1.2rem, 4vh, 2.4rem) auto; }
   h1 {
     font-family: var(--font-display);
     font-weight: 700;
@@ -235,13 +241,55 @@
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.8rem; }
   .hero .hero-ctas { justify-content: center; }
 
-  /* entrada escalonada */
-  .rise { opacity: 0; transform: translateY(22px); animation: rise 750ms var(--ease-out) forwards; }
-  .rise.d1 { animation-delay: 60ms; }
-  .rise.d2 { animation-delay: 160ms; }
-  .rise.d3 { animation-delay: 300ms; }
-  .rise.d4 { animation-delay: 460ms; }
+  /* entrada escalonada: arranca cuando la intro revela la página */
+  .rise { opacity: 0; transform: translateY(22px); }
+  .revealed .rise { animation: rise 750ms var(--ease-out) forwards; }
+  .revealed .rise.d1 { animation-delay: 60ms; }
+  .revealed .rise.d2 { animation-delay: 160ms; }
+  .revealed .rise.d3 { animation-delay: 300ms; }
+  .revealed .rise.d4 { animation-delay: 460ms; }
   @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* ---------- intro de logo a pantalla completa ---------- */
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--paper);
+    transition: opacity 900ms var(--ease-out), visibility 900ms;
+  }
+  .intro video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: var(--video-filter);
+    mix-blend-mode: var(--video-blend);
+  }
+  .intro-skip {
+    position: absolute;
+    bottom: max(2rem, env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem 0.2rem;
+    cursor: pointer;
+  }
+  .intro-skip:hover { color: var(--ink); border-color: var(--ink); }
+  .intro.done { opacity: 0; visibility: hidden; pointer-events: none; }
+  body.intro-active { overflow: hidden; }
+  body:not(.intro-active) .intro { display: none; }
+  @media (orientation: portrait) { .intro video { object-fit: contain; } }
+  @media (prefers-reduced-motion: reduce) { .intro { display: none !important; } }
 
   /* ---------- trusted ---------- */
   .trusted {
@@ -361,13 +409,14 @@
   }
   .statement .watermark {
     position: absolute;
-    inset: auto 0 auto 50%;
-    transform: translateX(-50%);
-    top: 50%;
-    translate: 0 -38%;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    top: 18%;
     width: min(680px, 92vw);
     opacity: var(--wm-opacity);
     pointer-events: none;
+    will-change: transform;
   }
   .statement blockquote {
     position: relative;
@@ -420,9 +469,21 @@
   }
 </style>
 </head>
-<body>
+<body class="intro-active">
 
-<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<noscript><style>
+  .reveal, .rise { opacity: 1 !important; transform: none !important; }
+  .intro { display: none !important; }
+  body.intro-active { overflow: auto !important; }
+</style></noscript>
+
+<!-- Intro: los constructores ensamblan el logo a pantalla completa y se revela la landing -->
+<div class="intro" id="intro">
+  <video autoplay muted playsinline preload="auto"
+    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='9'%3E%3Crect width='16' height='9' fill='%23ffffff'/%3E%3C/svg%3E"
+    src="INTRO_VIDEO_URL"></video>
+  <button class="intro-skip" type="button" data-i18n="intro-skip">Saltar intro</button>
+</div>
 
 <header>
   <div class="wrap nav-inner">
@@ -456,9 +517,7 @@
   <section class="hero">
     <div class="wrap">
       <p class="kicker rise d1">Web3 Growth &amp; Distribution</p>
-      <div class="hero-stage rise d2" aria-hidden="true">
-        <!-- Intro del logo generada con Higgsfield; si no carga, cae al logo estático -->
-        <video class="logo-video" autoplay muted playsinline preload="auto" width="800" height="456" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39HcLOtASf4iCiLi8cZ9kl4Lnu1/1a7082dd-c2a4-47d3-9853-83d3dd81e639.mp4"></video>
+      <div class="hero-stage rise d2" data-plx="0.1" aria-hidden="true">
         <img class="mark logo-still" src="assets/casa-blanca-logo.png" alt="">
       </div>
       <h1 class="rise d3" data-i18n="hero-h1">La agencia de GTM <em>para LATAM.</em></h1>
@@ -469,7 +528,7 @@
       </div>
 
       <!-- trusted by -->
-      <div class="trusted rise d4">
+      <div class="trusted rise d4" data-plx="0.05">
         <span class="label">Trusted by</span>
         <img src="assets/tangem.jpg" alt="Tangem" title="Tangem">
         <img src="assets/solana.jpg" alt="Solana" title="Solana">
@@ -528,7 +587,7 @@
 
   <!-- statement -->
   <section class="statement">
-    <img class="watermark mark" src="assets/casa-blanca-logo.png" alt="">
+    <img class="watermark mark" data-plx="-0.22" src="assets/casa-blanca-logo.png" alt="">
     <div class="wrap reveal">
       <blockquote data-i18n="quote">«Hacemos crecer el proyecto, operamos la comunidad y <strong>damos la cara en la región.</strong> Sin intermediarios.»</blockquote>
     </div>
@@ -581,7 +640,8 @@
       "terreno-note": "Cada línea es una sala en la que estuvimos este año. Esa es la parte del marketing Web3 que la mayoría de agencias se salta, <strong>y es la parte que los clientes recuerdan.</strong>",
       "quote": "«Hacemos crecer el proyecto, operamos la comunidad y <strong>damos la cara en la región.</strong> Sin intermediarios.»",
       "cta-h2": "¿Listo para construir en LATAM?",
-      "cta-p": "Cuéntanos qué estás construyendo y te decimos exactamente cómo lo llevamos a la región."
+      "cta-p": "Cuéntanos qué estás construyendo y te decimos exactamente cómo lo llevamos a la región.",
+      "intro-skip": "Saltar intro"
     },
     en: {
       "nav-servicios": "Services",
@@ -604,7 +664,8 @@
       "terreno-note": "Every line is a room we were in this year. That is the part of Web3 marketing most agencies skip, <strong>and it is the part clients remember.</strong>",
       "quote": "“We grow the project, run the community and <strong>show up across the region.</strong> No middlemen.”",
       "cta-h2": "Ready to build in LATAM?",
-      "cta-p": "Tell us what you are building and we will tell you exactly how we take it to the region."
+      "cta-p": "Tell us what you are building and we will tell you exactly how we take it to the region.",
+      "intro-skip": "Skip intro"
     }
   };
 
@@ -626,11 +687,47 @@
     applyLang(lang);
   });
 
-  // Si el video no puede cargarse o reproducirse, mostramos el logo estático
-  const stage = document.querySelector(".hero-stage");
-  const logoVideo = document.querySelector(".logo-video");
-  logoVideo.addEventListener("error", () => stage.classList.add("fallback"));
-  logoVideo.play?.().catch(() => stage.classList.add("fallback"));
+  // ---------- Intro de logo a pantalla completa ----------
+  const intro = document.getElementById("intro");
+  const introVideo = intro.querySelector("video");
+  const reveal = () => {
+    if (document.body.classList.contains("revealed")) return;
+    document.body.classList.add("revealed");
+    intro.classList.add("done");
+    try { sessionStorage.setItem("cbl-intro", "1"); } catch (e) {}
+    setTimeout(() => document.body.classList.remove("intro-active"), 950);
+  };
+  let seen = false;
+  try { seen = sessionStorage.getItem("cbl-intro") === "1"; } catch (e) {}
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (seen || reduced) {
+    document.body.classList.remove("intro-active");
+    document.body.classList.add("revealed");
+    intro.remove();
+  } else {
+    introVideo.addEventListener("ended", reveal);
+    introVideo.addEventListener("error", reveal);
+    intro.querySelector(".intro-skip").addEventListener("click", reveal);
+    // Cinturón de seguridad: si el video no arranca o se cuelga, revelamos igual
+    introVideo.play?.().catch(reveal);
+    setTimeout(() => { if (introVideo.readyState < 2) reveal(); }, 3500);
+    setTimeout(reveal, 8000);
+  }
+
+  // ---------- Parallax por capas (transform, rAF) ----------
+  const plxEls = Array.from(document.querySelectorAll("[data-plx]"));
+  if (!reduced && plxEls.length) {
+    let ticking = false;
+    const updatePlx = () => {
+      for (const el of plxEls) {
+        el.style.transform = "translate3d(0," + (window.scrollY * parseFloat(el.dataset.plx)).toFixed(1) + "px,0)";
+      }
+      ticking = false;
+    };
+    addEventListener("scroll", () => {
+      if (!ticking) { requestAnimationFrame(updatePlx); ticking = true; }
+    }, { passive: true });
+  }
 
   document.querySelector(".theme-toggle").addEventListener("click", () => {
     const root = document.documentElement;

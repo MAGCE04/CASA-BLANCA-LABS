@@ -18,7 +18,9 @@ npx serve .
 
 ## Deploy
 
-Al ser un sitio estático de un solo archivo, funciona directo en GitHub Pages, Vercel, Netlify o Cloudflare Pages sin configuración.
+**Producción:** https://casablancalabs.higgsfield.app (Cloudflare Worker vía Higgsfield; el video de intro `intro.mp4` vive en ese deploy).
+
+Al ser un sitio estático de un solo archivo, también funciona directo en GitHub Pages, Vercel, Netlify o Cloudflare Pages sin configuración.
 
 ## Pendiente
 

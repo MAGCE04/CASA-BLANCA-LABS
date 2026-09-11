@@ -30,6 +30,8 @@
     --wm-opacity: 0.055;
     --show-moon: block;
     --show-sun: none;
+    --video-filter: none;
+    --video-blend: multiply;
     --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
     --font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
     --font-mark: "Michroma", "Space Grotesk", sans-serif;
@@ -48,6 +50,8 @@
       --wm-opacity: 0.07;
       --show-moon: none;
       --show-sun: block;
+      --video-filter: invert(1);
+      --video-blend: screen;
     }
   }
   :root[data-theme="dark"] {
@@ -61,6 +65,8 @@
     --wm-opacity: 0.07;
     --show-moon: none;
     --show-sun: block;
+    --video-filter: invert(1);
+    --video-blend: screen;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -116,6 +122,7 @@
   .nav-links a { text-decoration: none; color: var(--muted); transition: color 150ms var(--ease-out); padding: 0.4rem 0; }
   .nav-links a:hover { color: var(--ink); }
   @media (min-width: 820px) { .nav-links { display: flex; } }
+  @media (max-width: 600px) { .brand .wordmark { display: none; } .nav-right { gap: 0.6rem; } }
 
   .btn {
     font-family: var(--font-display);
@@ -169,8 +176,19 @@
     letter-spacing: 0.08em;
   }
 
-  /* ---------- hero ---------- */
-  .hero { padding: clamp(4rem, 11vh, 8rem) 0 0; }
+  /* ---------- hero: escena estática centrada ---------- */
+  .hero {
+    min-height: calc(100svh - 65px);
+    display: flex;
+    align-items: center;
+    padding: clamp(2rem, 5vh, 4rem) 0 clamp(2.5rem, 6vh, 4rem);
+  }
+  .hero .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
   .kicker {
     font-family: var(--font-display);
     font-size: 0.75rem;
@@ -178,39 +196,44 @@
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 2rem;
   }
+  .hero-stage {
+    width: min(620px, 92vw);
+    margin: clamp(0.5rem, 2vh, 1.5rem) 0;
+    position: relative;
+  }
+  .logo-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: var(--video-filter);
+    mix-blend-mode: var(--video-blend);
+  }
+  .logo-still { display: none; width: 68%; margin: clamp(1.5rem, 5vh, 3rem) auto; }
+  .hero-stage.fallback .logo-video { display: none; }
+  .hero-stage.fallback .logo-still { display: block; }
   h1 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.9rem, 8.2vw, 6rem);
+    font-size: clamp(2.7rem, 7vw, 5.2rem);
     line-height: 0.98;
     letter-spacing: -0.035em;
     text-wrap: balance;
-    max-width: 11em;
   }
   h1 em {
     font-style: italic;
     font-weight: 300;
     letter-spacing: -0.02em;
   }
-  .hero-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2.5rem;
-    margin-top: 3rem;
-  }
-  .hero-bottom .lead {
+  .hero .lead {
     font-size: clamp(1.02rem, 1.5vw, 1.18rem);
     color: var(--muted);
-    max-width: 30em;
+    max-width: 36em;
+    margin-top: 1.4rem;
   }
-  .hero-bottom .lead strong { color: var(--ink); font-weight: 800; }
+  .hero .lead strong { color: var(--ink); font-weight: 800; }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.8rem; }
-  .hero-building { flex: 0 1 340px; min-width: 240px; }
-  .hero-building img { width: 100%; height: auto; display: block; }
+  .hero .hero-ctas { justify-content: center; }
 
   /* entrada escalonada */
   .rise { opacity: 0; transform: translateY(22px); animation: rise 750ms var(--ease-out) forwards; }
@@ -225,8 +248,9 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 1.1rem 1.4rem;
-    padding: clamp(3.5rem, 8vh, 5.5rem) 0 0;
+    padding: clamp(2.5rem, 6vh, 4rem) 0 0;
   }
   .trusted .label {
     font-family: var(--font-display);
@@ -391,6 +415,8 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rise, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
+    .logo-video { display: none; }
+    .logo-still { display: block; }
   }
 </style>
 </head>
@@ -430,18 +456,16 @@
   <section class="hero">
     <div class="wrap">
       <p class="kicker rise d1">Web3 Growth &amp; Distribution</p>
-      <h1 class="rise d2" data-i18n="hero-h1">La agencia de GTM <em>para LATAM.</em></h1>
-      <div class="hero-bottom">
-        <div class="rise d3">
-          <p class="lead" data-i18n="hero-lead">Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong></p>
-          <div class="hero-ctas">
-            <a class="btn" href="#contacto" data-i18n="cta-hablemos">Hablemos</a>
-            <a class="btn quiet" href="#servicios" data-i18n="cta-servicios">Ver servicios</a>
-          </div>
-        </div>
-        <div class="hero-building rise d4" aria-hidden="true">
-          <img class="mark" src="assets/casa-blanca-logo.png" alt="">
-        </div>
+      <div class="hero-stage rise d2" aria-hidden="true">
+        <!-- Intro del logo generada con Higgsfield; si no carga, cae al logo estático -->
+        <video class="logo-video" autoplay muted playsinline preload="auto" width="800" height="456" src="https://d2ol7oe51mr4n9.cloudfront.net/user_39HcLOtASf4iCiLi8cZ9kl4Lnu1/1a7082dd-c2a4-47d3-9853-83d3dd81e639.mp4"></video>
+        <img class="mark logo-still" src="assets/casa-blanca-logo.png" alt="">
+      </div>
+      <h1 class="rise d3" data-i18n="hero-h1">La agencia de GTM <em>para LATAM.</em></h1>
+      <p class="lead rise d3" data-i18n="hero-lead">Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong></p>
+      <div class="hero-ctas rise d4">
+        <a class="btn" href="#contacto" data-i18n="cta-hablemos">Hablemos</a>
+        <a class="btn quiet" href="#servicios" data-i18n="cta-servicios">Ver servicios</a>
       </div>
 
       <!-- trusted by -->
@@ -601,6 +625,12 @@
     try { localStorage.setItem("cbl-lang", lang); } catch (e) {}
     applyLang(lang);
   });
+
+  // Si el video no puede cargarse o reproducirse, mostramos el logo estático
+  const stage = document.querySelector(".hero-stage");
+  const logoVideo = document.querySelector(".logo-video");
+  logoVideo.addEventListener("error", () => stage.classList.add("fallback"));
+  logoVideo.play?.().catch(() => stage.classList.add("fallback"));
 
   document.querySelector(".theme-toggle").addEventListener("click", () => {
     const root = document.documentElement;

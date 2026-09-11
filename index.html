@@ -47,6 +47,7 @@
     --show-sun: none;
     --video-filter: none;
     --video-blend: multiply;
+    --grid: rgba(12, 12, 12, 0.03);
     --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
     --font-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
     --font-mark: "Michroma", "Space Grotesk", sans-serif;
@@ -67,6 +68,7 @@
       --show-sun: block;
       --video-filter: invert(1);
       --video-blend: screen;
+      --grid: rgba(242, 242, 237, 0.04);
     }
   }
   :root[data-theme="dark"] {
@@ -82,6 +84,7 @@
     --show-sun: block;
     --video-filter: invert(1);
     --video-blend: screen;
+    --grid: rgba(242, 242, 237, 0.04);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -89,6 +92,10 @@
 
   body {
     background: var(--paper);
+    /* retícula de plano arquitectónico, apenas perceptible */
+    background-image:
+      repeating-linear-gradient(to bottom, var(--grid) 0, var(--grid) 1px, transparent 1px, transparent 88px),
+      repeating-linear-gradient(to right, var(--grid) 0, var(--grid) 1px, transparent 1px, transparent 88px);
     color: var(--ink);
     font-family: var(--font-body);
     font-size: 1rem;
@@ -96,6 +103,11 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: var(--paper); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border: 3px solid var(--paper); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--faint); }
 
   ::selection { background: var(--ink); color: var(--paper); }
   a { color: inherit; }
@@ -191,18 +203,12 @@
     letter-spacing: 0.08em;
   }
 
-  /* ---------- hero: escena estática centrada ---------- */
+  /* ---------- hero editorial asimétrico ---------- */
   .hero {
     min-height: calc(100svh - 65px);
     display: flex;
     align-items: center;
     padding: clamp(2rem, 5vh, 4rem) 0 clamp(2.5rem, 6vh, 4rem);
-  }
-  .hero .wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
   }
   .kicker {
     font-family: var(--font-display);
@@ -211,35 +217,59 @@
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: clamp(1.5rem, 4vh, 3rem);
   }
-  .hero-stage {
-    width: min(620px, 92vw);
-    margin: clamp(0.5rem, 2vh, 1.5rem) 0;
-    position: relative;
-  }
-  .logo-still { display: block; width: 68%; margin: clamp(1.2rem, 4vh, 2.4rem) auto; }
+  .kicker::before { content: ""; width: 3rem; height: 1px; background: var(--ink); }
   h1 {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.7rem, 7vw, 5.2rem);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    text-wrap: balance;
+    font-size: clamp(3rem, 9.5vw, 7.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    max-width: 10.5em;
   }
   h1 em {
     font-style: italic;
     font-weight: 300;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+  }
+  .hero-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    margin-top: clamp(2rem, 5vh, 3.5rem);
   }
   .hero .lead {
     font-size: clamp(1.02rem, 1.5vw, 1.18rem);
     color: var(--muted);
-    max-width: 36em;
-    margin-top: 1.4rem;
+    max-width: 30em;
   }
   .hero .lead strong { color: var(--ink); font-weight: 800; }
-  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.8rem; }
-  .hero .hero-ctas { justify-content: center; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+  .hero-meta {
+    margin-top: clamp(2rem, 5vh, 3rem);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-meta .langs {
+    margin-left: auto;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 0.3rem 0.6rem;
+  }
 
   /* entrada escalonada: arranca cuando la intro revela la página */
   .rise { opacity: 0; transform: translateY(22px); }
@@ -296,7 +326,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
     gap: 1.1rem 1.4rem;
     padding: clamp(2.5rem, 6vh, 4rem) 0 0;
   }
@@ -315,11 +344,18 @@
     object-fit: cover;
     display: block;
     box-shadow: 0 0 0 1px var(--tile-ring);
-    transition: transform 150ms var(--ease-out);
+    filter: grayscale(1);
+    opacity: 0.8;
+    transition: transform 150ms var(--ease-out), filter 200ms var(--ease-out), opacity 200ms var(--ease-out);
   }
   .trusted .tile { background: #0c0c0c; display: grid; place-items: center; }
-  .trusted .tile img { width: 26px; height: 26px; border-radius: 0; }
-  .trusted img:hover, .trusted .tile:hover { transform: translateY(-3px); }
+  .trusted .tile img { width: 26px; height: 26px; border-radius: 0; box-shadow: none; }
+  .trusted img:hover, .trusted .tile:hover {
+    transform: translateY(-3px);
+    filter: grayscale(0);
+    opacity: 1;
+  }
+  .trusted .tile:hover img { filter: grayscale(0); opacity: 1; }
 
   /* ---------- flujo editorial ---------- */
   .flow { padding-top: clamp(6rem, 14vh, 10rem); }
@@ -351,6 +387,15 @@
     font-size: clamp(2.6rem, 6.5vw, 4.6rem);
     letter-spacing: -0.03em;
     line-height: 1;
+    transition: transform 350ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .service:hover .service-word {
+      transform: translateX(10px);
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1.5px var(--ink);
+    }
+    .service:hover .service-word span { -webkit-text-fill-color: var(--faint); -webkit-text-stroke: 0; }
   }
   .service-word span {
     font-family: var(--font-mark);
@@ -464,8 +509,6 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .rise, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
-    .logo-video { display: none; }
-    .logo-still { display: block; }
   }
 </style>
 </head>
@@ -517,14 +560,13 @@
   <section class="hero">
     <div class="wrap">
       <p class="kicker rise d1">Web3 Growth &amp; Distribution</p>
-      <div class="hero-stage rise d2" data-plx="0.1" aria-hidden="true">
-        <img class="mark logo-still" src="assets/casa-blanca-logo.png" alt="">
-      </div>
-      <h1 class="rise d3" data-i18n="hero-h1">La agencia de GTM <em>para LATAM.</em></h1>
-      <p class="lead rise d3" data-i18n="hero-lead">Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong></p>
-      <div class="hero-ctas rise d4">
-        <a class="btn" href="#contacto" data-i18n="cta-hablemos">Hablemos</a>
-        <a class="btn quiet" href="#servicios" data-i18n="cta-servicios">Ver servicios</a>
+      <h1 class="rise d2" data-i18n="hero-h1">La agencia de GTM <em>para LATAM.</em></h1>
+      <div class="hero-bottom rise d3">
+        <p class="lead" data-i18n="hero-lead">Hacemos crecer y distribuimos proyectos Web3 en la región, con la infraestructura de comunidad que lo sostiene. <strong>Todos los días, en español e inglés, al mismo estándar.</strong></p>
+        <div class="hero-ctas">
+          <a class="btn" href="#contacto" data-i18n="cta-hablemos">Hablemos</a>
+          <a class="btn quiet" href="#servicios" data-i18n="cta-servicios">Ver servicios</a>
+        </div>
       </div>
 
       <!-- trusted by -->
@@ -539,6 +581,8 @@
         <img src="assets/blue.png" alt="" >
         <span class="tile"><img src="assets/sphere.svg" alt=""></span>
       </div>
+
+      <p class="hero-meta rise d4">CDMX &nbsp;·&nbsp; Bogotá &nbsp;·&nbsp; Lima &nbsp;·&nbsp; Río de Janeiro <span class="langs">ES / EN</span></p>
     </div>
   </section>
 
